@@ -6,7 +6,7 @@ import { supabase } from "@/layout/layout";
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     console.log(req.body);
-    // res.status(200).end(`${req.body}`);
+    res.status(200).end(`good job`);
     // const { title, author, description, otherFields } = req.body;
 
     // Inserta el nuevo libro en la base de datos de Supabase
