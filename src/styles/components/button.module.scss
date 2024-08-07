@@ -1,0 +1,16 @@
+@import "../colors";
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 10px;
+    margin: 8px;
+    border-radius: 8px;
+    background-color: $secondary;
+    box-shadow: 0 2px 2px 1px #6d6968;
+
+}
+
+.button:hover {
+    opacity: 0.9;
+}
