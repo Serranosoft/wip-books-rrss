@@ -16,6 +16,8 @@ export default function Home() {
             <main className={styles.main}>
                 <h1>Hola bebe</h1>
                 <GoogleButton />
+                <Button url="/libro/rtyrtyrtyrty">Ver libro de prueba 1</Button>
+                <Button url="/libro/libro-de-prueba-2/">Ver libro de prueba 2</Button>
             </main>
         </>
     );
