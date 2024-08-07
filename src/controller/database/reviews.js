@@ -23,7 +23,6 @@ export async function removeReview({ reviewId }) {
 export async function getAllReviewsById({ bookId, offset = 0 }) {
     const { data, error } = await supabase.from("reviews").select("content, rating").eq("book_id", bookId).range(offset, 8);
     if (error) {
-        console.log(error);
         return;
     }
     return data;

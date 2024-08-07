@@ -30,3 +30,47 @@ export async function getAllBooks() {
     )
     return data?.posts.edges;
 }
+
+export async function getBookBySlug(slug) {
+    const data = await fetchAPI(
+        `
+        {
+            post(id: "/book/${slug}", idType: SLUG) {
+                postId
+                title
+                content
+                slug
+                book {
+                    author
+                    name
+                }
+                featuredImage {
+                    node {
+                        altText
+                        sourceUrl
+                    }
+                }
+            }
+        }
+        `
+    )
+
+    return data?.post;
+}
+
+export async function getAllSlugs(category) {
+    const data = await fetchAPI(
+        `
+        {
+            posts(where: {categoryName: "${category}"}, first: 300) {
+                edges {
+                    node {
+                        slug
+                    }
+                }
+            }
+        }
+    `
+    )
+    return data?.posts
+}
