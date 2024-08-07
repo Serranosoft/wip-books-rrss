@@ -1,12 +1,14 @@
 import Head from "next/head";
 import styles from "@/styles/home.module.scss";
 import GoogleButton from "@/components/google-button";
+import Button from "@/components/button";
+
 
 export default function Home() {
     return (
         <>
             <Head>
-                <title>Goodreads alternative</title>
+                <title>YummyReads: Tu biblioteca de confianza</title>
                 <meta name="description" content="Goodreads alternative" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
