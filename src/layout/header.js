@@ -1,6 +1,7 @@
 
 import styles from "@/styles/layout/header.module.scss";
 import Button from "@/components/button";
+import Search from "@/components/search";
 
 export default function Header() {
 
@@ -8,7 +9,7 @@ export default function Header() {
 
         <header className={`${styles.header}`}>
             <img src="/img/yummy-reads.png"></img>
-            <p>Buscador</p>
+            <Search />
             <Button>Log In</Button>
         </header>
     )
