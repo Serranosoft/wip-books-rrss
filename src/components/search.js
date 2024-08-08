@@ -46,7 +46,10 @@ export default function Search() {
     return (
         <>
             <div className={styles.container}>
-                <input type="search" className={styles.input} value={input} onChange={(e) => setInput(e.target.value)} disabled={!fuse}></input>
+                <div className={styles.inputWrapper}>
+                    <input type="search" className={styles.input} value={input} onChange={(e) => setInput(e.target.value)} disabled={!fuse}></input>
+                    {/* Svg lupa */}
+                </div>
                 {
                     result && result.length > 0 &&
                     <div className={styles.result}>
