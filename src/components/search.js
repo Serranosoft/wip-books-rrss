@@ -1,6 +1,8 @@
+import styles from "@/styles/components/search.module.scss";
 import { getAllBooks } from "@/controller/cms/books";
-import Fuse from "fuse.js";
 import { useEffect, useState } from "react";
+import Link from "next/link";
+import Fuse from "fuse.js";
 
 export const fuseOptions = { keys: ["node.title"] };
 export default function Search() {
@@ -25,9 +27,11 @@ export default function Search() {
 
     /** Cuando el usuario empiece a escribir se recibirá el resultado del filtrado */
     useEffect(() => {
-        if (input.length > 1) {
+        if (input.length > 0) {
             const result = fuse.search(input);
             setResult(result);
+        } else {
+            setResult(null);
         }
     }, [input])
 
@@ -41,8 +45,18 @@ export default function Search() {
 
     return (
         <>
-            <div>
-                <input type="search" value={input} onChange={(e) => setInput(e.target.value)} disabled={!fuse}></input>
+            <div className={styles.container}>
+                <input type="search" className={styles.input} value={input} onChange={(e) => setInput(e.target.value)} disabled={!fuse}></input>
+                {
+                    result && result.length > 0 &&
+                    <div className={styles.result}>
+                        {result.map((book) =>
+                            <Link key={book.item.node.postId} href={`/libro/${book.item.node.slug}`}>
+                                <span>{book.item.node.title}</span>
+                            </Link>
+                        )}
+                    </div>
+                }
             </div>
         </>
     )
