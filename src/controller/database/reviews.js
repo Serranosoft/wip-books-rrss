@@ -1,4 +1,4 @@
-import { supabase } from "@/layout/layout";
+import { supabase } from '@/utils/supabase';
 import { v4 as uuidv4 } from 'uuid';
 
 /** Añadir una review */

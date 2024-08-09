@@ -3,28 +3,23 @@ import Rating from "@/components/rating";
 import { getAllSlugs, getBookBySlug } from "@/controller/cms/books";
 import { getAllReviewsById } from "@/controller/database/reviews";
 import { getSession } from "@/controller/database/user";
+import { Context } from "@/utils/context";
 import { getTotalRating } from "@/utils/rating";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 export default function book({ data, reviewsData }) {
 
-    const [reviews, setReviews] = useState([]);
+    const { userId } = useContext(Context);
 
-    const [userId, setUserId] = useState(null);
+    const [reviews, setReviews] = useState([]);
     const [bookId, setBookId] = useState(null);
     const [rating, setRating] = useState(null);
 
     /** Constructor */
-    useEffect(() => {
-        async function handleUser() {
-            const id = await getUserId();
-            setUserId(id);
-        }
-        
+    useEffect(() => {        
         function handleBook() { setBookId(data.postId) };
         function handleReviews() { setReviews(reviewsData) };
         
-        handleUser();
         handleBook();
         handleReviews();
     }, [])
@@ -39,11 +34,6 @@ export default function book({ data, reviewsData }) {
     async function onReviewAdd() {
         const newReviews = await getAllReviewsById({ bookId: data.postId });
         setReviews(newReviews);
-    }
-    
-    async function getUserId() {
-        const { user } = await getSession();
-        return user.id;
     }
 
     function handleRating() {

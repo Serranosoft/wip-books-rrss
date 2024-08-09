@@ -1,21 +1,21 @@
 
 import styles from "@/styles/layout/header.module.scss";
 import Search from "@/components/search";
-import { isAuth, login, logout } from "@/controller/database/user";
-import { useEffect, useState } from "react";
+import { login, logout } from "@/controller/database/user";
+import { useContext, useEffect, useState } from "react";
 import Button from "@/components/button";
+import { Context } from "@/utils/context";
 
 export default function Header() {
 
+    const { userId } = useContext(Context);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     useEffect(() => {
-        async function checkAuth() {
-            const auth = await isAuth();
-            setIsAuthenticated(auth);
+        if (userId) {
+            setIsAuthenticated(isAuthenticated);
         }
-        checkAuth();
-    }, []);
+    }, [userId])
 
     async function logoutUser() {
         await logout();
