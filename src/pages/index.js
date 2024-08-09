@@ -1,7 +1,7 @@
 import AddReviewElement from "@/components/add-review";
 import styles from "@/styles/home.module.scss";
-import Button from "@/components/button";
 import Head from "next/head";
+import ButtonLink from "@/components/button-link";
 
 export default function Home() {
 
@@ -15,9 +15,8 @@ export default function Home() {
             </Head>
             <main className={styles.main}>
                 <h1>Hola bebe</h1>
-                <Button url="/libro/rtyrtyrtyrty">Ver libro de prueba 1</Button>
-                <Button url="/libro/libro-de-prueba-2/">Ver libro de prueba 2</Button>
-                <AddReviewElement />
+                <ButtonLink url="/libro/rtyrtyrtyrty">Ver libro de prueba 1</ButtonLink>
+                <ButtonLink url="/libro/libro-de-prueba-2/">Ver libro de prueba 2</ButtonLink>
             </main>
         </>
     );

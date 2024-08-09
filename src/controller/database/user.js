@@ -11,7 +11,7 @@ export async function logout() {
 
 export async function getSession() {
     const { data: { user } } = await supabase.auth.getUser();
-    console.log(user);
+    return { user };
 }
 
 export async function isAuth() {
