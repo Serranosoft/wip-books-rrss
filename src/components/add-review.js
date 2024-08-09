@@ -1,9 +1,9 @@
 import { addReview } from "@/controller/database/reviews";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function AddReviewElement({ bookId, userId, onReviewAdd }) {
 
-    const rating = 3.9;
+    const rating = 2.5;
     const [content, setContent] = useState("");
 
 

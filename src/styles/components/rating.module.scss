@@ -1,0 +1,15 @@
+.rating {
+    position: relative;
+    display: inline-flex; 
+    text-align: "left";
+    cursor: pointer;
+
+    .star {
+        position: relative;
+        cursor: pointer;
+        .filled {
+            position: absolute;
+            overflow: hidden;
+        }
+    }
+}

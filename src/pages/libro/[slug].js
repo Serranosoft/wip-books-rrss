@@ -1,4 +1,5 @@
 import AddReviewElement from "@/components/add-review";
+import Rating from "@/components/rating";
 import { getAllSlugs, getBookBySlug } from "@/controller/cms/books";
 import { getAllReviewsById } from "@/controller/database/reviews";
 import { getSession } from "@/controller/database/user";
@@ -8,53 +9,67 @@ import { useEffect, useState } from "react";
 export default function book({ data, reviewsData }) {
 
     const [reviews, setReviews] = useState([]);
-    
+
     const [userId, setUserId] = useState(null);
     const [bookId, setBookId] = useState(null);
-    
+    const [rating, setRating] = useState(null);
+
+    /** Constructor */
     useEffect(() => {
-        async function getUserId() {
-            const { user } = await getSession();
-            return user.id;
-        }
-
-        async function fetchData() {
-            const id = await getUserId(); 
+        async function handleUser() {
+            const id = await getUserId();
             setUserId(id);
-            setBookId(data.postId); 
         }
-
-        fetchData();
-
-        if (reviewsData && reviewsData.length > 0) {
-            setReviews(reviewsData);
-        }
+        
+        function handleBook() { setBookId(data.postId) };
+        function handleReviews() { setReviews(reviewsData) };
+        
+        handleUser();
+        handleBook();
+        handleReviews();
     }, [])
 
+    /** Cuando una review cambia actualiza el rating*/
+    useEffect(() => {
+        if (reviews.length > 0) {
+            handleRating();
+        }
+    }, [reviews])
+    
     async function onReviewAdd() {
         const newReviews = await getAllReviewsById({ bookId: data.postId });
         setReviews(newReviews);
     }
+    
+    async function getUserId() {
+        const { user } = await getSession();
+        return user.id;
+    }
 
+    function handleRating() {
+        const rating = getTotalRating(reviews.map((review) => review.rating));
+        setRating(rating);
+    }
 
     return (
         <>
             <div>
                 <h1>Libro: {data.title}</h1>
-                <h2>Puntuación total: { getTotalRating(reviews.map((review) => review.rating)) }</h2>
+                { rating && <Rating initialStars={rating} big={true} isInteractive={false} /> }
                 <hr></hr>
                 <h3>Opiniones de los usuarios</h3>
                 {
                     reviews.map((review) =>
-                        <div>
+                        <div key={review.id}>
                             <h2>{review.users.name}</h2>
                             <img src={review.users.image} />
+                            <Rating isInteractive={false} initialStars={getTotalRating([review.rating])} />
                             <p>{review.content} - <span> puntuación: {review.rating}</span></p>
                         </div>
                     )
                 }
-                { userId && bookId && <AddReviewElement {... { userId, bookId: data.postId, onReviewAdd }}/> }
-                
+                {userId && bookId && <AddReviewElement {... { userId, bookId: data.postId, onReviewAdd }} />}
+
             </div>
         </>
     )
