@@ -3,7 +3,7 @@ export function getTotalRating(ratings) {
         let sum = 0;
         ratings.forEach((rating) => sum += rating);
         const result = sum / ratings.length;
-        return Math.round((result + Number.EPSILON) * 100) / 100;
+        return Math.round(result * 2) / 2;
     }
     return ratings[0];
 }
