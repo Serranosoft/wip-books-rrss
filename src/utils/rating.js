@@ -1,8 +1,9 @@
 export function getTotalRating(ratings) {
     if (ratings.length > 1) {
-        const sum = ratings.map((rating) => rating += rating);
+        let sum = 0;
+        ratings.forEach((rating) => sum += rating);
         const result = sum / ratings.length;
-        return result;
+        return Math.round((result + Number.EPSILON) * 100) / 100;
     }
     return ratings[0];
 }
