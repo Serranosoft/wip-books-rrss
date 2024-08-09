@@ -3,6 +3,9 @@ import { getAllBooks } from "@/controller/cms/books";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Fuse from "fuse.js";
+import Lupa from "@/components/lupa";
+
+
 
 export const fuseOptions = { keys: ["node.title"] };
 export default function Search() {
@@ -47,8 +50,11 @@ export default function Search() {
         <>
             <div className={styles.container}>
                 <div className={styles.inputWrapper}>
-                    <input type="search" className={styles.input} value={input} onChange={(e) => setInput(e.target.value)} disabled={!fuse}></input>
-                    {/* Svg lupa */}
+                    <div className={styles.yoquese}>
+                        <span>Libros</span>
+                    </div>
+                    <input type="search" placeholder="Escribe un libro..." className={styles.input} value={input} onChange={(e) => setInput(e.target.value)} disabled={!fuse}></input>
+                    <Lupa />
                 </div>
                 {
                     result && result.length > 0 &&

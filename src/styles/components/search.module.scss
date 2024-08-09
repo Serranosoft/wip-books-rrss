@@ -1,10 +1,46 @@
+@import "../colors";
+
 .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     .inputWrapper {
-        input {
-    
+        display: flex;
+        flex-wrap: nowrap;
+        column-gap: 8px;
+        width: 350px;
+        height: 32px;
+        border: 1px solid $primary-dark;
+        border-radius: 30px;
+
+
+        .yoquese {
+            background-color: $primary-dark;
+            width: 100px;
+            padding: 0 8px;
+            border-right: 1px solid $primary-dark;
+            border-radius: 30px;
+            text-align: center;
+            align-content: center;
+
+            span {
+                font-style: italic;
+                text-align: center;
+                color: white;
+            }
         }
+
+        input {
+            border: 0;
+            flex: 1;
+            background-color: white;
+        }
+
         svg {
+            height: 20px;
+            padding: 0 8px;
+            align-self: center;
 
         }
 
@@ -12,9 +48,7 @@
 
     .result {
         a {
-            span {
-                
-            }
+            span {}
         }
     }
 }

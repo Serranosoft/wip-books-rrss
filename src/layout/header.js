@@ -27,7 +27,7 @@ export default function Header() {
     return (
 
         <header className={`${styles.header}`}>
-            <img src="/img/yummy-reads.png"></img>
+            <img src="/img/YummyReads.png"></img>
             <Search />
             <Button onClick={!isAuthenticated ? loginUser : logoutUser}>{ !isAuthenticated ? "Iniciar sesión" : "Cerrar sesión" }</Button>
         </header>
