@@ -10,6 +10,7 @@
     },
     "dependencies": {
         "@supabase/supabase-js": "^2.45.0",
+        "@szhsin/react-menu": "^4.2.2",
         "fuse.js": "^7.0.0",
         "next": "14.2.5",
         "react": "^18",

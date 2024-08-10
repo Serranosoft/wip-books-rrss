@@ -8,7 +8,8 @@ import { Context } from "@/utils/context";
 import Modal from "@/components/modal";
 import GoogleButton from "@/components/google-button";
 import UserProfile from "@/components/user-profile";
-
+import { Menu, MenuItem } from '@szhsin/react-menu';
+import "@szhsin/react-menu/dist/index.css";
 export default function Header() {
 
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -41,9 +42,14 @@ export default function Header() {
                     !isAuthenticated ?
                         <Button onClick={() => setSignInModal(true)}>Iniciar sesión</Button>
                         :
-                        <div className={styles.avatarWrapper}>
-                            { avatar ? <img src={avatar} referrerpolicy="no-referrer" /> : <UserProfile /> }
-                        </div>
+                        <Menu menuButton={
+                            <div className={styles.avatarWrapper}>
+                                {avatar ? <img src={avatar} referrerpolicy="no-referrer" /> : <UserProfile />}
+                            </div>
+                        }>
+                            <MenuItem>Mi cuenta (Work in progress...)</MenuItem>
+                            <MenuItem onClick={logoutUser}>Cerrar sesión</MenuItem>
+                        </Menu>
 
                 }
             </header>
