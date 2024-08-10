@@ -14,8 +14,8 @@ export async function getSession() {
     return { user };
 }
 
-export async function getAvatar({ id }) {
-    const { data, error } = await supabase.from("users").select("image").eq("id", id);
+export async function getUserInfo({ id }) {
+    const { data, error } = await supabase.from("users").select("name, image").eq("id", id);
     if (error) console.log(error);
     return data;
 }

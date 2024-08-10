@@ -11,16 +11,24 @@
         width: 180px;
     }
 
-    .avatarWrapper {
-        display: flex;
-        border-radius: 100%;
-
-        img,
-        svg {
-            width: 2.5rem;
-            height: 2.5rem;
-            border-radius: inherit;
-            cursor: pointer;
+    .userMenu {
+        .avatarWrapper {
+            display: flex;
+            border-radius: 100%;
+    
+            img,
+            svg {
+                width: 2.5rem;
+                height: 2.5rem;
+                border-radius: inherit;
+                cursor: pointer;
+            }
+        }
+        span {
+            display: block;
+            font-size: 1.1rem;
+            font-weight: 700;
+            padding: 0.75rem;
         }
     }
 
