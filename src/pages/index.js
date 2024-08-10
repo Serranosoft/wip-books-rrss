@@ -1,4 +1,3 @@
-import AddReviewElement from "@/components/add-review";
 import styles from "@/styles/home.module.scss";
 import Head from "next/head";
 import ButtonLink from "@/components/button-link";
