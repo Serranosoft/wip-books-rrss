@@ -5,6 +5,7 @@ import { getAllReviewsById } from "@/controller/database/reviews";
 import { getSession } from "@/controller/database/user";
 import { Context } from "@/utils/context";
 import { getTotalRating } from "@/utils/rating";
+import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 
 export default function book({ data, reviewsData }) {
@@ -51,8 +52,8 @@ export default function book({ data, reviewsData }) {
                 {
                     reviews.map((review) =>
                         <div key={review.id}>
-                            <h2>{review.users.name}</h2>
-                            <img src={review.users.image} />
+                            <Link href={`/usuario/${review.users.slug}`}><h2>{review.users.name}</h2></Link>
+                            <Link href={`/usuario/${review.users.slug}`}><img src={review.users.image} /></Link>
                             <Rating isInteractive={false} initialStars={getTotalRating([review.rating])} />
                             <p>{review.content} - <span> puntuación: {review.rating}</span></p>
                         </div>
