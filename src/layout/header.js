@@ -1,22 +1,29 @@
 
 import styles from "@/styles/layout/header.module.scss";
 import Search from "@/components/search";
-import { login, logout } from "@/controller/database/user";
+import { getAvatar, login, logout } from "@/controller/database/user";
 import { useContext, useEffect, useState } from "react";
 import Button from "@/components/button";
 import { Context } from "@/utils/context";
 import Modal from "@/components/modal";
 import GoogleButton from "@/components/google-button";
+import UserProfile from "@/components/user-profile";
 
 export default function Header() {
 
-    const { userId } = useContext(Context);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [signInModal, setSignInModal] = useState(false);
+    const [avatar, setAvatar] = useState(null);
+    const { userId } = useContext(Context);
 
     useEffect(() => {
+        async function getUserAvatar() {
+            const result = await getAvatar({ id: userId });
+            setAvatar(result[0].image)
+        }
         if (userId) {
-            setIsAuthenticated(isAuthenticated);
+            setIsAuthenticated(true);
+            getUserAvatar();
         }
     }, [userId])
 
@@ -30,11 +37,19 @@ export default function Header() {
             <header className={`${styles.header}`}>
                 <img src="/img/YummyReads.png"></img>
                 <Search />
-                <Button onClick={!isAuthenticated ? () => setSignInModal(true) : logoutUser}>{ !isAuthenticated ? "Iniciar sesión" : "Cerrar sesión" }</Button>
+                {
+                    !isAuthenticated ?
+                        <Button onClick={() => setSignInModal(true)}>Iniciar sesión</Button>
+                        :
+                        <div className={styles.avatarWrapper}>
+                            { avatar ? <img src={avatar} referrerpolicy="no-referrer" /> : <UserProfile /> }
+                        </div>
+
+                }
             </header>
             <Modal {...{ show: signInModal, setShow: setSignInModal }}>
                 <p>Iniciar sesión en Yummy Reads</p>
-                <GoogleButton onClick={login} />
+                <GoogleButton />
             </Modal>
         </>
     )
