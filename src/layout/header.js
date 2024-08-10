@@ -1,7 +1,7 @@
 
 import styles from "@/styles/layout/header.module.scss";
 import Search from "@/components/search";
-import { getAvatar, getUserInfo, login, logout } from "@/controller/database/user";
+import { getAvatar, getUserInfo, getUserInfo_db, login, logout } from "@/controller/database/user";
 import { useContext, useEffect, useState } from "react";
 import Button from "@/components/button";
 import { Context } from "@/utils/context";
@@ -10,23 +10,29 @@ import GoogleButton from "@/components/google-button";
 import UserProfile from "@/components/user-profile";
 import { Menu, MenuDivider, MenuItem } from '@szhsin/react-menu';
 import "@szhsin/react-menu/dist/index.css";
+import { useRouter } from "next/router";
+import Link from "next/link";
 export default function Header() {
 
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [signInModal, setSignInModal] = useState(false);
     const [avatar, setAvatar] = useState(null);
     const [name, setName] = useState(null);
+    const [slug, setSlug] = useState(null);
     const { userId } = useContext(Context);
 
+    const router = useRouter();
+
     useEffect(() => {
-        async function getUserAvatar() {
-            const result = await getUserInfo({ id: userId });
+        async function getUserInfo() {
+            const result = await getUserInfo_db({ id: userId });
             setAvatar(result[0].image)
             setName(result[0].name)
+            setSlug(result[0].slug)
         }
         if (userId) {
             setIsAuthenticated(true);
-            getUserAvatar();
+            getUserInfo();
         }
     }, [userId])
 
@@ -47,11 +53,11 @@ export default function Header() {
                         <div className={styles.userMenu}>
                             <Menu menuButton={
                                 <div className={styles.avatarWrapper}>
-                                    {avatar ? <img src={avatar} referrerpolicy="no-referrer" /> : <UserProfile />}
+                                    {avatar ? <img src={avatar} referrerPolicy="no-referrer" /> : <UserProfile />}
                                 </div>
                             }>
                                 <span>{name}</span>
-                                <MenuItem>Mi cuenta (Work in progress...)</MenuItem>
+                                <MenuItem><Link href={`/usuario/${slug}`}>Mi cuenta (Work in progress...)</Link></MenuItem>
                                 <MenuDivider />
 
                                 <MenuItem>Ajustes (Work in progress...)</MenuItem>

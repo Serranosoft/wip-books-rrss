@@ -14,8 +14,20 @@ export async function getSession() {
     return { user };
 }
 
-export async function getUserInfo({ id }) {
-    const { data, error } = await supabase.from("users").select("name, image").eq("id", id);
+export async function getUserInfo_db({ id }) {
+    const { data, error } = await supabase.from("users").select("name, image, slug").eq("id", id);
+    if (error) console.log(error);
+    return data;
+}
+
+export async function getUserSlugs() {
+    const { data, error } = await supabase.from("users").select("slug");
+    if (error) console.log(error);
+    return data;
+}
+
+export async function getUserInfoBySlug({ slug }) {
+    const { data, error } = await supabase.from("users").select("name, image").eq("slug", slug);
     if (error) console.log(error);
     return data;
 }
