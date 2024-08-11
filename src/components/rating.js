@@ -5,6 +5,7 @@ import { MdOutlineStar, MdOutlineStarBorder } from "react-icons/md";
 export const starSize = 50;
 
 export default function Rating({ initialStars = 0, isInteractive = true, big = false, setRating }) {
+    console.log(isInteractive);
     const [activeRating, setActiveRating] = useState(initialStars);
     const [hoveredRating, setHoveredRating] = useState(0);
     const [isHovered, setIsHovered] = useState(false);
@@ -65,7 +66,7 @@ export default function Rating({ initialStars = 0, isInteractive = true, big = f
                 const showRatingWithPrecision = isActiveRating && isRatingWithPrecision && isRatingEqualToIndex;
 
                 return (
-                    <div key={index} className={styles.star}>
+                    <div key={index} className={`${styles.star} ${isInteractive === false && styles.cursorDefault}`}>
                         <div className={styles.filled} style={{ width: showRatingWithPrecision ? `${(stars % 1) * 100}%` : '0%' }}>
                             <MdOutlineStar size={big ? starSize : starSize / 2} color={"#e87400"} />
                         </div>

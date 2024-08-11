@@ -2,11 +2,10 @@
     position: relative;
     display: inline-flex; 
     text-align: "left";
-    cursor: pointer;
-
     .star {
         position: relative;
         cursor: pointer;
+        &.cursorDefault { cursor: default }
         .filled {
             position: absolute;
             overflow: hidden;
