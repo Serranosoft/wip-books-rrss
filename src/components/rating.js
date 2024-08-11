@@ -5,7 +5,6 @@ import { MdOutlineStar, MdOutlineStarBorder } from "react-icons/md";
 export const starSize = 50;
 
 export default function Rating({ initialStars = 0, isInteractive = true, big = false, setRating }) {
-    console.log(isInteractive);
     const [activeRating, setActiveRating] = useState(initialStars);
     const [hoveredRating, setHoveredRating] = useState(0);
     const [isHovered, setIsHovered] = useState(false);

@@ -21,11 +21,22 @@ export async function removeReview({ reviewId }) {
 
 /** Obtener todas las reviews (Filtradas de 8 en 8 con un offset) */
 export async function getAllReviewsById({ bookId, offset = 0 }) {
-    const { data, error } = await supabase.from("reviews").select("id, content, rating, users (name, image, slug)").eq("book_id", bookId)/* .range(offset, 8) */;
+    const { data, error } = await supabase.from("reviews").select("id, content, rating, users (id, name, image, slug)").eq("book_id", bookId)/* .range(offset, 8) */;
     if (error) {
         return;
     }
     return data;
+}
+
+export async function userReviewedBookId({ bookId, userId }) {
+    const { count, error } = await supabase.from("reviews").select("*", { count: 'exact', head: true }).eq("book_id", bookId).eq("user_id", userId);
+    if (error) {
+        return false;
+    } else if (count) {
+        return true
+    } else {
+        return false;
+    }
 }
 
 /** Devuelve los 20 últimos registros */

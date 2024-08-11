@@ -10,7 +10,11 @@ export default function Layout({ children }) {
     useEffect(() => {
         async function handleUser() {
             const { user } = await getSession();
-            if (user && user.id) setUserId(user.id);
+            if (user && user.id) {
+                setUserId(user.id);
+            } else {
+                setUserId(undefined);
+            }
         }
 
         handleUser();
