@@ -49,8 +49,8 @@ export default function Search() {
     return (
         <>
             <div className={styles.container}>
-                <div className={styles.inputWrapper}>
-                    <div className={styles.yoquese}>
+                <div className={styles.wrapper}>
+                    <div>
                         <span>Libros</span>
                     </div>
                     <input type="search" placeholder="Escribe un libro..." className={styles.input} value={input} onChange={(e) => setInput(e.target.value)} disabled={!fuse}></input>
