@@ -26,13 +26,8 @@ export default function Layout({ children }) {
 
     return (
         <Context.Provider value={{ ... { userId } }}>
-            <style jsx global>{`
-                html {
-                  font-family: ${nunitoSans.className};
-                }
-            `}</style>
-            <Header />
-            <main className={salsa.variable}>
+            <main className={`${salsa.variable} ${nunitoSans.className}`}>
+                <Header />
                 {children}
             </main>
         </Context.Provider>
