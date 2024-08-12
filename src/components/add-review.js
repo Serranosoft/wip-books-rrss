@@ -1,8 +1,8 @@
-import { addReview } from "@/controller/database/reviews";
+import { addReview, getAllReviewsById } from "@/controller/database/reviews";
 import { useState } from "react";
 import Rating from "./rating";
 
-export default function AddReviewElement({ bookId, userId, onReviewAdd }) {
+export default function AddReviewElement({ bookId, userId, setReviews, orderReviewsByCurrentUser }) {
 
     const [content, setContent] = useState("");
     const [rating, setRating] = useState(0);
@@ -10,6 +10,12 @@ export default function AddReviewElement({ bookId, userId, onReviewAdd }) {
     async function addNewReview({ content, rating, bookId, userId }) {
         await addReview({ content, rating, bookId, userId });
         onReviewAdd();
+    }
+
+    async function onReviewAdd() {
+        const newReviews = await getAllReviewsById({ bookId });
+        const reviews_sorted = orderReviewsByCurrentUser(newReviews);
+        setReviews(reviews_sorted);
     }
 
     return (

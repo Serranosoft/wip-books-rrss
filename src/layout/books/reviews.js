@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import { MdEdit } from "react-icons/md";
 import { EditReview } from "./edit-review";
+import DeleteReviewElement from "./delete-review";
 
 export default function Reviews({ bookId, reviewsData, setRating }) {
 
@@ -64,13 +65,6 @@ export default function Reviews({ bookId, reviewsData, setRating }) {
         return copy;
     }
 
-    /** Callback que se ejecuta cuando se ha escrito una nueva review */
-    async function onReviewAdd() {
-        const newReviews = await getAllReviewsById({ bookId });
-        const reviews_sorted = orderReviewsByCurrentUser(newReviews);
-        setReviews(reviews_sorted);
-    }
-
     return (
         <>
             {
@@ -80,6 +74,7 @@ export default function Reviews({ bookId, reviewsData, setRating }) {
                         <Link href={`/usuario/${review.users.slug}`}><img src={review.users.image} referrerPolicy="no-referrer" /></Link>
                         <Rating isInteractive={false} initialStars={getTotalRating([review.rating])} />
                         { review.users.id === userId && <EditReview {...{ reviewId: review.id, setReviews, reviews }} /> }
+                        { review.users.id === userId && <DeleteReviewElement {...{ reviewId: review.id, setReviews, reviews, setUserReviewed }} /> }
                         <p>{review.content} - <span> puntuación: {review.rating}</span></p>
                     </div>
                 )
@@ -87,7 +82,7 @@ export default function Reviews({ bookId, reviewsData, setRating }) {
             {
 
                 userId ?
-                    userReviewed !== null && userReviewed === false && <AddReviewElement {... { userId, bookId, onReviewAdd }} />
+                    userReviewed !== null && userReviewed === false && <AddReviewElement {... { userId, bookId, setReviews, orderReviewsByCurrentUser }} />
                     :
                     <div>{/* Se mostrará un botón que mostrará el reviewElement si existe userId o se le abrirá el modal de iniciar sesión */}</div>
             }

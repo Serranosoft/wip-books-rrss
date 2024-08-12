@@ -14,7 +14,7 @@ export async function editReview_db({ reviewId, content, rating }) {
 }
 
 /** Eliminar una review */
-export async function removeReview({ reviewId }) {
+export async function deleteReview_db({ reviewId }) {
     const response = await supabase.from("reviews").delete().eq("id", reviewId);
     console.log(response);
 }
