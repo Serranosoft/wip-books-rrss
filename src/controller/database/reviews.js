@@ -8,8 +8,8 @@ export async function addReview({ content, rating, bookId, userId }) {
 }
 
 /** Actualizar una review */
-export async function updateReview({ reviewId, content, rating, bookId, userId }) {
-    const { error } = await supabase.from("reviews").update({ content: content, rating: rating, "book_id": bookId, "user_id": userId }).eq("id", reviewId);
+export async function editReview_db({ reviewId, content, rating }) {
+    const { error } = await supabase.from("reviews").update({ content: content, rating: rating }).eq("id", reviewId);
     if (error) console.log(error);
 }
 

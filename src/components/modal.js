@@ -6,10 +6,10 @@ export default function Modal({ show = false, setShow, children }) {
 
     const [active, setActive] = useState(false);
 
-
     useEffect(() => {
         setActive(show);
     }, [show])
+    
     return (
         <div className={`${styles.modal} ${active && styles.show}`}>
             <div>

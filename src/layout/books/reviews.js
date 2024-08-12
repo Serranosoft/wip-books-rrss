@@ -6,6 +6,7 @@ import { getTotalRating } from "@/utils/rating";
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import { MdEdit } from "react-icons/md";
+import { EditReview } from "./edit-review";
 
 export default function Reviews({ bookId, reviewsData, setRating }) {
 
@@ -35,6 +36,8 @@ export default function Reviews({ bookId, reviewsData, setRating }) {
     /** Cuando se añade una review se actualiza el rating total del libro */
     useEffect(() => {
         if (reviews.length > 0) calculateRating();
+
+        console.log(reviews);
     }, [reviews]);
 
     /** Calcula el rating nuevo después de que el usuario ha escrito una nueva review */
@@ -74,9 +77,9 @@ export default function Reviews({ bookId, reviewsData, setRating }) {
                 reviews.map((review) =>
                     <div key={review.id}>
                         <Link href={`/usuario/${review.users.slug}`}><h2>{review.users.name}</h2></Link>
-                        <Link href={`/usuario/${review.users.slug}`}><img src={review.users.image} /></Link>
+                        <Link href={`/usuario/${review.users.slug}`}><img src={review.users.image} referrerPolicy="no-referrer" /></Link>
                         <Rating isInteractive={false} initialStars={getTotalRating([review.rating])} />
-                        <MdEdit />
+                        { review.users.id === userId && <EditReview {...{ reviewId: review.id, setReviews, reviews }} /> }
                         <p>{review.content} - <span> puntuación: {review.rating}</span></p>
                     </div>
                 )
