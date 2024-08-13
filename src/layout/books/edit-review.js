@@ -2,13 +2,12 @@ import Modal from "@/components/modal";
 import Rating from "@/components/rating";
 import { editReview_db } from "@/controller/database/reviews";
 import { useEffect, useState } from "react";
-import { MdEdit } from "react-icons/md";
 
 export function EditReview({ review, reviews, setReviews, userId }) {
     
     const [show, setShow] = useState(false);
     const [content, setContent] = useState("");
-    const [rating, setRating] = useState(0);
+    const [rating, setRating] = useState(review.rating);
 
     useEffect(() => {
         setContent(review.content);
@@ -32,14 +31,13 @@ export function EditReview({ review, reviews, setReviews, userId }) {
 
     return (
         <>
-            {/* <MdEdit onClick={() => setShow(true)} /> */}
             <button onClick={() => setShow(true)}>{review.content.length > 0 ? "Cambiar valoración" : "Escribir una valoración"}</button>
             <Modal {... { show, setShow }}>
                 <p>{review.content.length > 0 ? "Cambiar valoración" : "Escribir una valoración"}</p>
                 <textarea style={{ width: 250, height: 250, background: "lightgray" }} value={content} onChange={(e) => setContent(e.target.value)}></textarea>
                 <div>
                     <p>Valoración</p>
-                    <Rating {...{ initialStars: review.rating, setRating, userId }} />
+                    <Rating {...{ initialStars: rating, setRating, userId }} />
                 </div>
                 <button onClick={editReview}>Actualizar review</button>
             </Modal>
