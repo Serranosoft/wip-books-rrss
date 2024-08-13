@@ -33,6 +33,8 @@ export default function AddReviewElement({ bookId, userId, setReviews, orderRevi
     }
 
     async function onReviewAdd() {
+        setUserReviewed(true);
+        
         const newReviews = await getAllReviewsById_db({ bookId });
         const reviews_sorted = orderReviewsByCurrentUser(newReviews);
         setReviews(reviews_sorted);
