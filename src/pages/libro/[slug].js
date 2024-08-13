@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 export default function book({ data, reviewsData }) {
 
     const [bookId, setBookId] = useState(null);
-    const [rating, setRating] = useState(null);
+    const [rating, setRating] = useState({ value: null });
 
     useEffect(() => {
         if (data) {
@@ -22,8 +22,8 @@ export default function book({ data, reviewsData }) {
             <div>
                 <h1>Libro: {data.title}</h1>
                 <div style={{ display: "flex", flexDirection: "row", gap: 8 }}>
-                    { rating && <Rating initialStars={rating} big={true} isInteractive={false} />}
-                    { rating && <Score {...{ bookId, rating }} /> }
+                    { rating.value && <Rating initialStars={rating.value} big={true} isInteractive={false} />}
+                    { rating.value && <Score {...{ bookId, rating }} /> }
                 </div>
                 <hr></hr>
                 <h3>Opiniones de los usuarios</h3>

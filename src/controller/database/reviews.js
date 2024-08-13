@@ -48,6 +48,12 @@ export async function getAllReviews_db() {
 }
 
 export async function getTotalReviewsById_db({ bookId }) {
+    const { count, error } = await supabase.from("reviews").select("*", { count: 'exact', head: true }).eq("book_id", bookId).gte("content", 0);
+    if (error) console.log(error);
+    return count;
+}
+
+export async function getTotalRatingsById_db({ bookId }) {
     const { count, error } = await supabase.from("reviews").select("*", { count: 'exact', head: true }).eq("book_id", bookId);
     if (error) console.log(error);
     return count;

@@ -31,7 +31,7 @@ export default function Reviews({ bookId, reviewsData, setRating }) {
     /** Calcula el rating nuevo después de que el usuario ha escrito una nueva review */
     function calculateRating() {
         const rating = getTotalRating(reviews.map((review) => review.rating));
-        setRating(rating);
+        setRating({ value: rating });
     }
 
     /** Encargado de ordenar las reviews para que se muestre la review del primer usuario arriba del todo */
