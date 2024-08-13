@@ -61,7 +61,9 @@ export default function Search() {
                     <div className={styles.result}>
                         {result.map((book) =>
                             <Link key={book.item.node.postId} href={`/libro/${book.item.node.slug}`}>
+                                <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1678747712i/117703749.jpg"></img>
                                 <span>{book.item.node.title}</span>
+                                <span>de Patti Smith</span>
                             </Link>
                         )}
                     </div>
