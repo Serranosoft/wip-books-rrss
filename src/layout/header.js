@@ -15,13 +15,11 @@ import Link from "next/link";
 export default function Header() {
 
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [signInModal, setSignInModal] = useState(false);
+    /* const [signInModal, setSignInModal] = useState(false); */
     const [avatar, setAvatar] = useState(null);
     const [name, setName] = useState(null);
     const [slug, setSlug] = useState(null);
-    const { userId } = useContext(Context);
-
-    const router = useRouter();
+    const { userId, setSignInModal } = useContext(Context);
 
     useEffect(() => {
         async function getUserInfo() {
@@ -67,10 +65,10 @@ export default function Header() {
 
                 }
             </header>
-            <Modal {...{ show: signInModal, setShow: setSignInModal }}>
+            {/* <Modal {...{ show: signInModal, setShow: setSignInModal }}>
                 <p>Iniciar sesión en Yummy Reads</p>
                 <GoogleButton />
-            </Modal>
+            </Modal> */}
         </>
     )
 

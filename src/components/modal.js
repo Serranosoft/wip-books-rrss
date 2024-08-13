@@ -2,7 +2,7 @@ import styles from "@/styles/components/modal.module.scss";
 import { useEffect, useState } from "react";
 import { MdClose } from "react-icons/md";
 
-export default function Modal({ show = false, setShow, children }) {
+export default function Modal({ show = false, setShow, children, important }) {
 
     const [active, setActive] = useState(false);
 
@@ -11,7 +11,7 @@ export default function Modal({ show = false, setShow, children }) {
     }, [show])
     
     return (
-        <div className={`${styles.modal} ${active && styles.show}`}>
+        <div className={`${styles.modal} ${active && styles.show} ${important && styles.important}`}>
             <div>
                 <div>
                     <div className={styles.header}>

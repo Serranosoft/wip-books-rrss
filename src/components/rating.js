@@ -1,15 +1,17 @@
 import styles from "@/styles/components/rating.module.scss";
-import { useEffect, useRef, useState } from "react";
+import { Context } from "@/utils/context";
+import { useContext, useEffect, useRef, useState } from "react";
 import { MdOutlineStar, MdOutlineStarBorder } from "react-icons/md";
 
 export const starSize = 50;
 
-export default function Rating({ initialStars = 0, isInteractive = true, big = false, setRating }) {
+export default function Rating({ initialStars = 0, isInteractive = true, big = false, setRating, userId }) {
     const [activeRating, setActiveRating] = useState(initialStars);
     const [hoveredRating, setHoveredRating] = useState(0);
     const [isHovered, setIsHovered] = useState(false);
 
     const ratingEl = useRef(null);
+    const { setSignInModal } = useContext(Context);
 
     useEffect(() => {
         setActiveRating(initialStars);
@@ -26,6 +28,10 @@ export default function Rating({ initialStars = 0, isInteractive = true, big = f
 
     function handleClick(e) {
         if (isInteractive) {
+            if (!userId) {
+                setSignInModal(true);
+                return;
+            } 
             setIsHovered(false);
             const rating = calculate(e);
             setActiveRating(rating);

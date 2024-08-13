@@ -15,11 +15,6 @@ export default function Reviews({ bookId, reviewsData, setRating }) {
     const [reviews, setReviews] = useState([]);
     const [userReviewed, setUserReviewed] = useState(null);
 
-    /** Saber si el usuario ha escrito una review */
-    useEffect(() => {
-        if (bookId && userId) hasUserReviewed();
-    }, [bookId, userId]);
-
     /** Ordenar reviews */
     useEffect(() => {
         console.log(userId);
@@ -47,12 +42,6 @@ export default function Reviews({ bookId, reviewsData, setRating }) {
         setRating(rating);
     }
 
-    /** Devuelve true/false dependiendo si el usuario ha escrito o no una review */
-    async function hasUserReviewed() {
-        const reviewed = await userReviewedBookId({ bookId, userId });
-        setUserReviewed(reviewed);
-    }
-
     /** Encargado de ordenar las reviews para que se muestre la review del primer usuario arriba del todo */
     function orderReviewsByCurrentUser(reviews) {
         const copy = [...reviews];
@@ -73,19 +62,13 @@ export default function Reviews({ bookId, reviewsData, setRating }) {
                         <Link href={`/usuario/${review.users.slug}`}><h2>{review.users.name}</h2></Link>
                         <Link href={`/usuario/${review.users.slug}`}><img src={review.users.image} referrerPolicy="no-referrer" /></Link>
                         <Rating isInteractive={false} initialStars={getTotalRating([review.rating])} />
-                        { review.users.id === userId && <EditReview {...{ reviewId: review.id, setReviews, reviews }} /> }
+                        { review.users.id === userId && <EditReview {...{ reviewId: review.id, userId, setReviews, reviews }} /> }
                         { review.users.id === userId && <DeleteReviewElement {...{ reviewId: review.id, setReviews, reviews, setUserReviewed }} /> }
                         <p>{review.content} - <span> puntuación: {review.rating}</span></p>
                     </div>
                 )
             }
-            {
-
-                userId ?
-                    userReviewed !== null && userReviewed === false && <AddReviewElement {... { userId, bookId, setReviews, orderReviewsByCurrentUser }} />
-                    :
-                    <div>{/* Se mostrará un botón que mostrará el reviewElement si existe userId o se le abrirá el modal de iniciar sesión */}</div>
-            }
+            <AddReviewElement {... { userId, bookId, setReviews, orderReviewsByCurrentUser, setUserReviewed, userReviewed }} />
         </>
     )
 }

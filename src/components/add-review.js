@@ -1,13 +1,32 @@
-import { addReview, getAllReviewsById } from "@/controller/database/reviews";
-import { useState } from "react";
+import { addReview, getAllReviewsById, userReviewedBookId } from "@/controller/database/reviews";
+import { useContext, useEffect, useState } from "react";
 import Rating from "./rating";
+import { Context } from "@/utils/context";
 
-export default function AddReviewElement({ bookId, userId, setReviews, orderReviewsByCurrentUser }) {
-
+export default function AddReviewElement({ bookId, userId, setReviews, orderReviewsByCurrentUser, setUserReviewed, userReviewed }) {
     const [content, setContent] = useState("");
     const [rating, setRating] = useState(0);
 
+    const { setSignInModal } = useContext(Context);
+
+    /** Saber si el usuario ha escrito una review */
+    useEffect(() => {
+        if (bookId && userId) hasUserReviewed();
+    }, [bookId, userId]);
+
+    /** Devuelve true/false dependiendo si el usuario ha escrito o no una review */
+    async function hasUserReviewed() {
+        const reviewed = await userReviewedBookId({ bookId, userId });
+        setUserReviewed(reviewed);
+    }
+
     async function addNewReview({ content, rating, bookId, userId }) {
+        if (!userId) {
+            setSignInModal(true);
+            return;
+        } else if (content.length < 1 || rating === 0) {
+            return;
+        }
         await addReview({ content, rating, bookId, userId });
         onReviewAdd();
     }
@@ -20,14 +39,18 @@ export default function AddReviewElement({ bookId, userId, setReviews, orderRevi
 
     return (
         <>
-            <div>
-                <textarea style={{ width: 250, height: 250, background: "lightgray" }} value={content} onChange={(e) => setContent(e.target.value)}></textarea>
+            {
+                !userId || (userId && (userReviewed !== null && userReviewed === false)) ?
                 <div>
-                    <p>Valoración</p>
-                    <Rating {...{ setRating }} />
+                    <textarea style={{ width: 250, height: 250, background: "lightgray" }} value={content} onChange={(e) => setContent(e.target.value)}></textarea>
+                    <div>
+                        <p>Valoración</p>
+                        <Rating {...{ setRating, userId }} />
+                    </div>
+                    <button onClick={() => addNewReview({ content, rating, bookId, userId })}>añadir review</button>
                 </div>
-                <button onClick={() => addNewReview({ content, rating, bookId, userId })}>añadir review</button>
-            </div>
+                : <></>
+            }
         </>
     )
 }

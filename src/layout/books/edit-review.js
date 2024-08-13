@@ -4,7 +4,7 @@ import { editReview_db } from "@/controller/database/reviews";
 import { useState } from "react";
 import { MdEdit } from "react-icons/md";
 
-export function EditReview({ reviewId, reviews, setReviews }) {
+export function EditReview({ reviewId, reviews, setReviews, userId }) {
     
     const [show, setShow] = useState(false);
     const [content, setContent] = useState("");
@@ -23,6 +23,8 @@ export function EditReview({ reviewId, reviews, setReviews }) {
         item.rating = rating;
         setReviews(copy);
     }
+    
+    // WIP: Validate() and show errors when rating or content less than 1
 
     return (
         <>
@@ -32,7 +34,7 @@ export function EditReview({ reviewId, reviews, setReviews }) {
                 <textarea style={{ width: 250, height: 250, background: "lightgray" }} value={content} onChange={(e) => setContent(e.target.value)}></textarea>
                 <div>
                     <p>Valoración</p>
-                    <Rating {...{ setRating }} />
+                    <Rating {...{ setRating, userId }} />
                 </div>
                 <button onClick={editReview}>Actualizar review</button>
             </Modal>
