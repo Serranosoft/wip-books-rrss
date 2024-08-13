@@ -2,7 +2,7 @@ import styles from "@/styles/components/modal.module.scss";
 import { useEffect, useState } from "react";
 import { MdClose } from "react-icons/md";
 
-export default function Modal({ show = false, setShow, children, important }) {
+export default function Modal({ show, setShow, children, important }) {
 
     const [active, setActive] = useState(false);
 

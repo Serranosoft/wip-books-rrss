@@ -7,7 +7,7 @@ export default function Home() {
     return (
         <>
             <Head>
-                <title>YummyReads: Tu biblioteca de confianza</title>
+                <title>ShinyReads: Tu biblioteca de confianza</title>
                 <meta name="description" content="Goodreads alternative" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />

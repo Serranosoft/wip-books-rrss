@@ -1,5 +1,4 @@
-import { getUserInfoBySlug, getUserSlugs } from "@/controller/database/user";
-import { useEffect } from "react";
+import { getUserInfoBySlug_db, getUserSlugs_db } from "@/controller/database/user";
 
 export default function User({ data }) {
     console.log(data);
@@ -14,7 +13,7 @@ export default function User({ data }) {
 
 
 export const getStaticPaths = async () => {
-    const slugs = await getUserSlugs();
+    const slugs = await getUserSlugs_db();
     return {
         paths: slugs.map((item) => `/usuario/${item.slug}`),
         fallback: false
@@ -22,7 +21,7 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async (context) => {
-    const data = await getUserInfoBySlug({ slug: context.params.slug });
+    const data = await getUserInfoBySlug_db({ slug: context.params.slug });
     return {
         props: { data }
     };

@@ -1,4 +1,4 @@
-import { addReview, getAllReviewsById, userReviewedBookId } from "@/controller/database/reviews";
+import { addReview_db, getAllReviewsById_db, userReviewedBookId_db } from "@/controller/database/reviews";
 import { useContext, useEffect, useState } from "react";
 import Rating from "./rating";
 import { Context } from "@/utils/context";
@@ -16,7 +16,7 @@ export default function AddReviewElement({ bookId, userId, setReviews, orderRevi
 
     /** Devuelve true/false dependiendo si el usuario ha escrito o no una review */
     async function hasUserReviewed() {
-        const reviewed = await userReviewedBookId({ bookId, userId });
+        const reviewed = await userReviewedBookId_db({ bookId, userId });
         setUserReviewed(reviewed);
     }
 
@@ -27,12 +27,12 @@ export default function AddReviewElement({ bookId, userId, setReviews, orderRevi
         } else if (content.length < 1 || rating === 0) {
             return;
         }
-        await addReview({ content, rating, bookId, userId });
+        await addReview_db({ content, rating, bookId, userId });
         onReviewAdd();
     }
 
     async function onReviewAdd() {
-        const newReviews = await getAllReviewsById({ bookId });
+        const newReviews = await getAllReviewsById_db({ bookId });
         const reviews_sorted = orderReviewsByCurrentUser(newReviews);
         setReviews(reviews_sorted);
     }

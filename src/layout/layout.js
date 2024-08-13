@@ -1,5 +1,5 @@
 import Header from "./header";
-import { getSession, isAuth } from "@/controller/database/user";
+import { getSession, getSession_auth, isAuth } from "@/controller/database/user";
 import { Context } from "@/utils/context";
 import { useEffect, useState } from "react";
 import { Nunito_Sans, Salsa } from 'next/font/google'
@@ -15,8 +15,8 @@ export default function Layout({ children }) {
     const [signInModal, setSignInModal] = useState(false);
 
     useEffect(() => {
-        async function handleUser() {
-            const { user } = await getSession();
+        async function getSession() {
+            const { user } = await getSession_auth();
             if (user && user.id) {
                 setUserId(user.id);
             } else {
@@ -24,7 +24,7 @@ export default function Layout({ children }) {
             }
         }
 
-        handleUser();
+        getSession();
     }, []);
 
     return (
@@ -34,7 +34,7 @@ export default function Layout({ children }) {
                 {children}
             </main>
             <Modal {...{ show: signInModal, setShow: setSignInModal, important: true }}>
-                <p>Iniciar sesión en Yummy Reads</p>
+                <p>Iniciar sesión en Shiny Reads</p>
                 <GoogleButton />
             </Modal>
         </Context.Provider>

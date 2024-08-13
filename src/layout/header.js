@@ -1,16 +1,13 @@
 
 import styles from "@/styles/layout/header.module.scss";
 import Search from "@/components/search";
-import { getAvatar, getUserInfo, getUserInfo_db, login, logout } from "@/controller/database/user";
+import { getUserInfo_db, logout } from "@/controller/database/user";
 import { useContext, useEffect, useState } from "react";
 import Button from "@/components/button";
 import { Context } from "@/utils/context";
-import Modal from "@/components/modal";
-import GoogleButton from "@/components/google-button";
 import UserProfile from "@/components/user-profile";
 import { Menu, MenuDivider, MenuItem } from '@szhsin/react-menu';
 import "@szhsin/react-menu/dist/index.css";
-import { useRouter } from "next/router";
 import Link from "next/link";
 export default function Header() {
 

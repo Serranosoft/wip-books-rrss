@@ -2,7 +2,7 @@ import { supabase } from '@/utils/supabase';
 import { v4 as uuidv4 } from 'uuid';
 
 /** Añadir una review */
-export async function addReview({ content, rating, bookId, userId }) {
+export async function addReview_db({ content, rating, bookId, userId }) {
     const { error } = await supabase.from("reviews").insert({ id: uuidv4(), content: content, rating: rating, "book_id": bookId, "user_id": userId });
     if (error) console.log(error);
 }
@@ -20,7 +20,7 @@ export async function deleteReview_db({ reviewId }) {
 }
 
 /** Obtener todas las reviews (Filtradas de 8 en 8 con un offset) */
-export async function getAllReviewsById({ bookId, offset = 0 }) {
+export async function getAllReviewsById_db({ bookId, offset = 0 }) {
     const { data, error } = await supabase.from("reviews").select("id, content, rating, users (id, name, image, slug)").eq("book_id", bookId)/* .range(offset, 8) */;
     if (error) {
         return;
@@ -28,7 +28,7 @@ export async function getAllReviewsById({ bookId, offset = 0 }) {
     return data;
 }
 
-export async function userReviewedBookId({ bookId, userId }) {
+export async function userReviewedBookId_db({ bookId, userId }) {
     const { count, error } = await supabase.from("reviews").select("*", { count: 'exact', head: true }).eq("book_id", bookId).eq("user_id", userId);
     if (error) {
         return false;
@@ -40,7 +40,7 @@ export async function userReviewedBookId({ bookId, userId }) {
 }
 
 /** Devuelve los 20 últimos registros */
-export async function getAllReviews() {
+export async function getAllReviews_db() {
     const { data, error } = await supabase.from("reviews").select().limit(20);
     if (error) {
         console.log(error);

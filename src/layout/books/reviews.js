@@ -1,13 +1,8 @@
 import AddReviewElement from "@/components/add-review";
-import Rating from "@/components/rating";
-import { getAllReviewsById, userReviewedBookId } from "@/controller/database/reviews";
 import { Context } from "@/utils/context";
 import { getTotalRating } from "@/utils/rating";
-import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
-import { MdEdit } from "react-icons/md";
-import { EditReview } from "./edit-review";
-import DeleteReviewElement from "./delete-review";
+import Review from "./review";
 
 export default function Reviews({ bookId, reviewsData, setRating }) {
 
@@ -17,7 +12,6 @@ export default function Reviews({ bookId, reviewsData, setRating }) {
 
     /** Ordenar reviews */
     useEffect(() => {
-        console.log(userId);
         if (reviewsData && userId !== null) {
             let reviews_sorted = [];
             if (userId) {
@@ -32,8 +26,6 @@ export default function Reviews({ bookId, reviewsData, setRating }) {
     /** Cuando se añade una review se actualiza el rating total del libro */
     useEffect(() => {
         if (reviews.length > 0) calculateRating();
-
-        console.log(reviews);
     }, [reviews]);
 
     /** Calcula el rating nuevo después de que el usuario ha escrito una nueva review */
@@ -56,18 +48,7 @@ export default function Reviews({ bookId, reviewsData, setRating }) {
 
     return (
         <>
-            {
-                reviews.map((review) =>
-                    <div key={review.id}>
-                        <Link href={`/usuario/${review.users.slug}`}><h2>{review.users.name}</h2></Link>
-                        <Link href={`/usuario/${review.users.slug}`}><img src={review.users.image} referrerPolicy="no-referrer" /></Link>
-                        <Rating isInteractive={false} initialStars={getTotalRating([review.rating])} />
-                        { review.users.id === userId && <EditReview {...{ reviewId: review.id, userId, setReviews, reviews }} /> }
-                        { review.users.id === userId && <DeleteReviewElement {...{ reviewId: review.id, setReviews, reviews, setUserReviewed }} /> }
-                        <p>{review.content} - <span> puntuación: {review.rating}</span></p>
-                    </div>
-                )
-            }
+            { reviews.map((review) => <Review {...{ review, reviews, userId, setReviews, setUserReviewed }} />) }
             <AddReviewElement {... { userId, bookId, setReviews, orderReviewsByCurrentUser, setUserReviewed, userReviewed }} />
         </>
     )

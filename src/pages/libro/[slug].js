@@ -1,6 +1,6 @@
 import Rating from "@/components/rating";
 import { getAllSlugs, getBookBySlug } from "@/controller/cms/books";
-import { getAllReviewsById } from "@/controller/database/reviews";
+import { getAllReviewsById_db } from "@/controller/database/reviews";
 import Reviews from "@/layout/books/reviews";
 import { useEffect, useState } from "react";
 
@@ -39,7 +39,7 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context) => {
     const data = await getBookBySlug(context.params.slug);
-    const reviewsData = await getAllReviewsById({ bookId: data.postId });
+    const reviewsData = await getAllReviewsById_db({ bookId: data.postId });
     return {
         props: { data, reviewsData }
     };
