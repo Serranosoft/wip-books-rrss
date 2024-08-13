@@ -1,24 +1,28 @@
 import Modal from "@/components/modal";
 import Rating from "@/components/rating";
 import { editReview_db } from "@/controller/database/reviews";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MdEdit } from "react-icons/md";
 
-export function EditReview({ reviewId, reviews, setReviews, userId }) {
+export function EditReview({ review, reviews, setReviews, userId }) {
     
     const [show, setShow] = useState(false);
     const [content, setContent] = useState("");
     const [rating, setRating] = useState(0);
 
+    useEffect(() => {
+        setContent(review.content);
+    }, [review])
+
     async function editReview() {
-        await editReview_db({ reviewId, content, rating });
+        await editReview_db({ reviewId: review.id, content, rating });
         onReviewEdit();
         setShow(false);
     }
 
     function onReviewEdit() {
         const copy = [...reviews];
-        const item = reviews.find((review) => review.id === reviewId);
+        const item = reviews.find((element) => element.id === review.id);
         item.content = content;
         item.rating = rating;
         setReviews(copy);
@@ -28,13 +32,14 @@ export function EditReview({ reviewId, reviews, setReviews, userId }) {
 
     return (
         <>
-            <MdEdit onClick={() => setShow(true)} />
+            {/* <MdEdit onClick={() => setShow(true)} /> */}
+            <button onClick={() => setShow(true)}>{review.content.length > 0 ? "Cambiar valoración" : "Escribir una valoración"}</button>
             <Modal {... { show, setShow }}>
-                <p>Editar review</p>
+                <p>{review.content.length > 0 ? "Cambiar valoración" : "Escribir una valoración"}</p>
                 <textarea style={{ width: 250, height: 250, background: "lightgray" }} value={content} onChange={(e) => setContent(e.target.value)}></textarea>
                 <div>
                     <p>Valoración</p>
-                    <Rating {...{ setRating, userId }} />
+                    <Rating {...{ initialStars: review.rating, setRating, userId }} />
                 </div>
                 <button onClick={editReview}>Actualizar review</button>
             </Modal>

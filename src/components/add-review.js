@@ -4,7 +4,6 @@ import Rating from "./rating";
 import { Context } from "@/utils/context";
 
 export default function AddReviewElement({ bookId, userId, setReviews, orderReviewsByCurrentUser, setUserReviewed, userReviewed }) {
-    const [content, setContent] = useState("");
     const [rating, setRating] = useState(0);
 
     const { setSignInModal } = useContext(Context);
@@ -13,6 +12,10 @@ export default function AddReviewElement({ bookId, userId, setReviews, orderRevi
     useEffect(() => {
         if (bookId && userId) hasUserReviewed();
     }, [bookId, userId]);
+
+    useEffect(() => {
+        if (rating > 0) { addNewReview({ content: "", rating, bookId, userId }) }
+    }, [rating])
 
     /** Devuelve true/false dependiendo si el usuario ha escrito o no una review */
     async function hasUserReviewed() {
@@ -23,8 +26,6 @@ export default function AddReviewElement({ bookId, userId, setReviews, orderRevi
     async function addNewReview({ content, rating, bookId, userId }) {
         if (!userId) {
             setSignInModal(true);
-            return;
-        } else if (content.length < 1 || rating === 0) {
             return;
         }
         await addReview_db({ content, rating, bookId, userId });
@@ -41,15 +42,13 @@ export default function AddReviewElement({ bookId, userId, setReviews, orderRevi
         <>
             {
                 !userId || (userId && (userReviewed !== null && userReviewed === false)) ?
-                <div>
-                    <textarea style={{ width: 250, height: 250, background: "lightgray" }} value={content} onChange={(e) => setContent(e.target.value)}></textarea>
                     <div>
-                        <p>Valoración</p>
-                        <Rating {...{ setRating, userId }} />
+                        <div>
+                            <p>Valoración</p>
+                            <Rating {...{ setRating, userId }} />
+                        </div>
                     </div>
-                    <button onClick={() => addNewReview({ content, rating, bookId, userId })}>añadir review</button>
-                </div>
-                : <></>
+                    : <></>
             }
         </>
     )
