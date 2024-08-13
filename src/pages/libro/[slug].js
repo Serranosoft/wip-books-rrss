@@ -1,4 +1,5 @@
 import Rating from "@/components/rating";
+import Score from "@/components/score";
 import { getAllSlugs, getBookBySlug } from "@/controller/cms/books";
 import { getAllReviewsById_db } from "@/controller/database/reviews";
 import Reviews from "@/layout/books/reviews";
@@ -20,7 +21,10 @@ export default function book({ data, reviewsData }) {
         <>
             <div>
                 <h1>Libro: {data.title}</h1>
-                {rating && <Rating initialStars={rating} big={true} isInteractive={false} />}
+                <div style={{ display: "flex", flexDirection: "row", gap: 8 }}>
+                    { rating && <Rating initialStars={rating} big={true} isInteractive={false} />}
+                    { rating && <Score {...{ bookId, rating }} /> }
+                </div>
                 <hr></hr>
                 <h3>Opiniones de los usuarios</h3>
                 <Reviews {...{ bookId, reviewsData, setRating }} />

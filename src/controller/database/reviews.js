@@ -28,6 +28,7 @@ export async function getAllReviewsById_db({ bookId, offset = 0 }) {
     return data;
 }
 
+/** Devuelve true/false dependiendo si un usuario ya ha escrito una review o no */
 export async function userReviewedBookId_db({ bookId, userId }) {
     const { count, error } = await supabase.from("reviews").select("*", { count: 'exact', head: true }).eq("book_id", bookId).eq("user_id", userId);
     if (error) {
@@ -42,9 +43,12 @@ export async function userReviewedBookId_db({ bookId, userId }) {
 /** Devuelve los 20 últimos registros */
 export async function getAllReviews_db() {
     const { data, error } = await supabase.from("reviews").select().limit(20);
-    if (error) {
-        console.log(error);
-        return;
-    }
+    if (error) console.log(error);
     return data;
+}
+
+export async function getTotalReviewsById_db({ bookId }) {
+    const { count, error } = await supabase.from("reviews").select("*", { count: 'exact', head: true }).eq("book_id", bookId);
+    if (error) console.log(error);
+    return count;
 }
