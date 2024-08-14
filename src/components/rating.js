@@ -73,7 +73,7 @@ export default function Rating({ initialStars = 0, isInteractive = true, big = f
                 return (
                     <div key={index} className={`${styles.star} ${isInteractive === false && styles.cursorDefault}`}>
                         <div className={styles.filled} style={{ width: showRatingWithPrecision ? `${(stars % 1) * 100}%` : '0%' }}>
-                            <MdOutlineStar size={big ? starSize : starSize / 2} color={"#e87400"} />
+                            <MdOutlineStar size={big ? starSize : starSize / 1.5} color={"#e87400"} />
                         </div>
                         <div>
                             {emptyStar ? <MdOutlineStarBorder size={big ? starSize : starSize / 1.5} color={"#e87400"} /> : <MdOutlineStar size={big ? starSize : starSize / 1.5} color={"#e87400"} />}
