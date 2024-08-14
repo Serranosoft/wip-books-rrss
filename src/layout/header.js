@@ -1,7 +1,7 @@
 
 import styles from "@/styles/layout/header.module.scss";
 import Search from "@/components/search";
-import { getUserInfo_db, logout } from "@/controller/database/user";
+import { getUserInfo_db, logout_auth } from "@/controller/database/user";
 import { useContext, useEffect, useState } from "react";
 import Button from "@/components/button";
 import { Context } from "@/utils/context";
@@ -32,7 +32,7 @@ export default function Header() {
     }, [userId])
 
     async function logoutUser() {
-        await logout();
+        await logout_auth();
         setIsAuthenticated(false);
     }
 

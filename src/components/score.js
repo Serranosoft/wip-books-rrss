@@ -23,8 +23,8 @@ export default function Score({ bookId, rating }) {
     return (
         <div className={styles.parent}>
             <span className={styles.score}>{rating.value}</span>
-            { ratings && <span className={styles.reviews}>{ratings} rating</span> }
-            { reviews && <span className={styles.reviews}>{reviews} reviews</span> }
+            { ratings && <span className="muted">{ratings} rating</span> }
+            { reviews && <span className="muted">{reviews} reviews</span> }
         </div>
     )
 }

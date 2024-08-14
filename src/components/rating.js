@@ -55,7 +55,7 @@ export default function Rating({ initialStars = 0, isInteractive = true, big = f
 
     return (
         <div
-            className={styles.rating}
+            className={`rating ${styles.rating}`}
             onClick={handleClick}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
@@ -75,8 +75,8 @@ export default function Rating({ initialStars = 0, isInteractive = true, big = f
                         <div className={styles.filled} style={{ width: showRatingWithPrecision ? `${(stars % 1) * 100}%` : '0%' }}>
                             <MdOutlineStar size={big ? starSize : starSize / 2} color={"#e87400"} />
                         </div>
-                        <div /* style={{ color: emptyStar ? 'gray' : 'inherit' }} */>
-                            {emptyStar ? <MdOutlineStarBorder size={big ? starSize : starSize / 2} color={"#e87400"} /> : <MdOutlineStar size={big ? starSize : starSize / 2} color={"#e87400"} />}
+                        <div>
+                            {emptyStar ? <MdOutlineStarBorder size={big ? starSize : starSize / 1.5} color={"#e87400"} /> : <MdOutlineStar size={big ? starSize : starSize / 1.5} color={"#e87400"} />}
                         </div>
                     </div>
                 );
