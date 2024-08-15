@@ -2,11 +2,11 @@ import Header from "./header";
 import { getSession, getSession_auth, isAuth } from "@/controller/database/user";
 import { Context } from "@/utils/context";
 import { useEffect, useState } from "react";
-import { Nunito_Sans, Salsa } from 'next/font/google'
+import { Nunito_Sans, Salsa, Source_Serif_4 } from 'next/font/google'
 import Modal from "@/components/modal";
 import GoogleButton from "@/components/google-button";
 
-const salsa = Salsa({ subsets: ['latin'], weight: ["400"], variable: "--font-salsa" });
+const salsa = Source_Serif_4({ subsets: ['latin'], weight: ["400", "500", "600", "700"], variable: "--font-serif" });
 const nunitoSans = Nunito_Sans({ subsets: ["latin"], weight: ["400", "500", "600", "700"] })
 
 export default function Layout({ children }) {
