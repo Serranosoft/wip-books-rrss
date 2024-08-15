@@ -27,7 +27,7 @@ export async function getUserSlugs_db() {
 }
 
 export async function getUserInfoBySlug_db({ slug }) {
-    const { data, error } = await supabase.from("users").select("name, image").eq("slug", slug);
+    const { data, error } = await supabase.from("users").select("name, image, slug, about, country, city").eq("slug", slug);
     if (error) console.log(error);
     return data;
 }
