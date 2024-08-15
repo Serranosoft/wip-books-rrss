@@ -53,12 +53,12 @@ export default function User({ data }) {
                         </div>
                         <div className={styles.tmp}>
                             <div className={styles.group}>
-                                <span>{info[0].name} está leyendo</span>
+                                <p><span className={`${styles.name} ellipsis`}>{info[0].name}</span><span> está leyendo</span></p>
                                 <span className="muted">Actualmente no está leyendo ningún libro</span>
                                 {/* Imprimir libros que está leyendoi */}
                             </div>
                             <div className={styles.group}>
-                                <span>{info[0].name} quiere leer</span>
+                            <p><span className={`${styles.name} ellipsis`}>{info[0].name}</span><span> quiere leer</span></p>
                                 <span className="muted">Actualmente no quiere leer ningún libro</span>
                                 {/* Imprimir libros que quiere leer */}
                             </div>

@@ -22,3 +22,9 @@ input {
     font-size: 0.9rem;
     color: #393939;
 }
+
+.ellipsis {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}

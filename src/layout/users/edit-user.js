@@ -37,23 +37,23 @@ export default function EditUser({ info, setInfo }) {
             </div>
             <Modal {... { show, setShow, className: styles.modal }}>
                 <p className={styles.heading}>Editar perfil</p>
-                <div className={styles.group}>
+                <div className="group">
                     <label className="muted">Nombre</label>
                     <input type="text" value={name} onChange={(e) => setName(e.target.value)} maxLength={50} />
                 </div>
-                <div className={styles.group}>
+                <div className="group">
                     <label className="muted">Título</label>
                     <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} maxLength={60} />
                 </div>
-                <div className={styles.group}>
+                <div className="group">
                     <label className="muted">País</label>
                     <input type="text" value={country} onChange={(e) => setCountry(e.target.value)} maxLength={60} />
                 </div>
-                <div className={styles.group}>
+                <div className="group">
                     <label className="muted">Ciudad</label>
                     <input type="text" value={city} onChange={(e) => setCity(e.target.value)} maxLength={60} />
                 </div>
-                <div className={styles.group}>
+                <div className="group">
                     <label className="muted">Sobre mi <strong>(250 carácteres max.)</strong></label>
                     <textarea value={about} onChange={(e) => setAbout(e.target.value)} maxLength={250}></textarea>
                 </div>

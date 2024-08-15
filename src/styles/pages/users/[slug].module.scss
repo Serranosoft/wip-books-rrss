@@ -90,9 +90,15 @@
                 display: flex;
                 flex-direction: column;
                 padding: 0.5rem 0;
-                span:not(:global .muted) {
+                p {
+                    display: flex;
+                    gap: 0.35rem;
                     font-size: 1.15rem;
                     font-weight: 800;
+                }
+
+                .name {
+                    max-width: 250px;
                 }
 
             }
