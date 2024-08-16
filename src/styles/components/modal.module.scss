@@ -60,7 +60,10 @@
                     margin: 0.5rem 0;
                     gap: 0.25rem;
                     label {
-                        font-size: 0.9rem;
+                        font-size: 0.95rem;
+                        span {
+                            font-size: 0.75rem;
+                        }
                     }
                     input {
                         width: 100%;

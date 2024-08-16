@@ -2,10 +2,13 @@ import styles from "@/styles/pages/users/[slug].module.scss";
 import { getUserInfoBySlug_db, getUserSlugs_db } from "@/controller/database/user";
 import EditUser from "@/layout/users/edit-user";
 import { useEffect, useState } from "react";
-
+import { useRouter } from 'next/navigation';
 export default function User({ data }) {
 
+    const router = useRouter();
+
     const [info, setInfo] = useState(null);
+    const [reload, setReload] = useState(false);
 
     useEffect(() => {
         if (data) {
@@ -13,10 +16,17 @@ export default function User({ data }) {
         }
     }, [data])
 
+    useEffect(() => {
+        if (reload) {
+            setReload(false);
+            router.push(`/usuario/${info[0].slug}`);
+        } 
+    }, [reload, info]);
+
     return (
         <>
             {
-                info &&
+                info && info[0] &&
                 <div className={styles.container}>
                     <div className={styles.wrapper}>
                         <div className={styles.userInfo}>
@@ -26,7 +36,7 @@ export default function User({ data }) {
                                     <span className={styles.name}>{info[0].name}</span>
                                     <span className="muted">@{info[0].slug}</span>
                                 </div>
-                                <EditUser {...{ info, setInfo }} />
+                                <EditUser {...{ info, setInfo, setReload }} />
                             </div>
                             <div className={styles.info}>
                                 <span className={styles.title}>{info[0].title || ""}</span>
@@ -75,12 +85,13 @@ export const getStaticPaths = async () => {
     const slugs = await getUserSlugs_db();
     return {
         paths: slugs.map((item) => `/usuario/${item.slug}`),
-        fallback: false
+        fallback: "blocking"
     }
 }
 
 export const getStaticProps = async (context) => {
     const data = await getUserInfoBySlug_db({ slug: context.params.slug });
+    if (!data || data.length < 1) return { notFound: true }
     return {
         props: { data }
     };

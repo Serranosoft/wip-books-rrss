@@ -33,7 +33,7 @@ export async function getUserInfoBySlug_db({ slug }) {
 }
 
 /** Endpoint para actualizar un usuario de la base de datos */
-export async function editUserInfo_db({ userId, name, title, country, city, about }) {
-    const { error } = await supabase.from("users").update({ name: name, title: title, country: country, city: city, about: about }).eq("id", userId);
+export async function editUserInfo_db({ userId, name, title, country, city, slug, about }) {
+    const { error } = await supabase.from("users").update({ name: name, title: title, country: country, city: city, slug: slug, about: about }).eq("id", userId);
     if (error) console.log(error);
 }

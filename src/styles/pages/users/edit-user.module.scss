@@ -1,4 +1,6 @@
 
+@import "../../colors.scss";
+
 .container {
     align-self: flex-start;
 
@@ -13,6 +15,37 @@
             font-family: var(--font-serif);
             font-weight: 600;
             font-size: 2rem;
+        }
+
+        .inputUser {
+            display: flex;
+            width: 100%;
+            &:focus-within {
+                span {
+                    border-top: 2px solid $primary;
+                    border-bottom: 2px solid $primary;
+                    border-left: 2px solid $primary;
+                }
+
+            }
+            span {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 2.25rem;
+                width: 2.25rem;
+                padding: 0.15rem 0.5rem;
+                background-color: #d6d6d6;
+                color: rgb(64, 64, 64);
+                border-top: 1px solid $primary;
+                border-bottom: 1px solid $primary;
+                border-left: 1px solid $primary;
+            }
+            input {
+                border-left: 0 !important;
+                border-top-left-radius: 0 !important;
+                border-bottom-left-radius: 0 !important;
+            }
         }
     }
 }
