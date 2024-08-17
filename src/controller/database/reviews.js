@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 /** Añadir una review */
 export async function addReview_db({ content, rating, bookId, userId }) {
-    const { error } = await supabase.from("reviews").insert({ id: uuidv4(), content: content, rating: rating, "book_id": bookId, "user_id": userId });
+    const { error } = await supabase.from("reviews").insert({ id: uuidv4(), content: content, rating: rating, "book_id": bookId, "user_id": userId, published: ((new Date()).toISOString()).toLocaleString('es-ES') });
     if (error) console.log(error);
 }
 

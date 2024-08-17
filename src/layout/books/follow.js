@@ -1,5 +1,5 @@
 import Button from "@/components/button";
-import { follow_db, followingByBookReviews, unfollow_db } from "@/controller/database/followers";
+import { follow_db, getFollowingByBookReviews_db, unfollow_db } from "@/controller/database/followers";
 import { useEffect, useState } from "react";
 
 export default function Follow({ reviews, review, userId }) {
@@ -37,9 +37,9 @@ export default function Follow({ reviews, review, userId }) {
         setFollowing(items);
     }
 
-    /** Encargado de obtener un array con los ids de los usuarios que han escrito una review y los tiene como «Seguido»  */
+    /** Encargado de obtener un array con los ids de los usuarios que tengo como «Seguido»  */
     async function usersFollowing() {
-        const result = await followingByBookReviews({ userId, reviews });
+        const result = await getFollowingByBookReviews_db({ userId, reviews });
         setFollowing(result);
     }
 
