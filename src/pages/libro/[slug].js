@@ -20,48 +20,54 @@ export default function book({ data, reviewsData }) {
     }, [data])
 
     return (
-        <div className={styles.parent}>
+        <>
+            {
+                data &&
 
-            <div className={styles.layout}>
+                <div className={styles.parent}>
 
-                <div className={styles.sticky}>
-                    <div className={styles.content}>
-                        <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1678747712i/117703749.jpg" />
-                        <Button>Leer</Button>
-                        <Button>Comprar en Amazon</Button>
-                        {rating.value && <Rating initialStars={rating.value} big={false} isInteractive={false} />}
-                    </div>
-                </div>
+                    <div className={styles.layout}>
 
-                <div className={styles.container}>
-                    <div className={styles.content}>
-                        <div className={styles.title}>
-                            <h1>{data.title}</h1>
-                            <span>{data.author || "Marta Bijan"}</span>
-                        </div>
-                        <div className={styles.rating}>
-                            {rating.value && <Rating initialStars={rating.value} big={false} isInteractive={false} />}
-                            {rating.value && <Score {...{ bookId, rating }} />}
-                        </div>
-                        <div className={styles.description}>
-                            Sinopsis del libro.....
-                        </div>
-                        <div className={styles.metadata}>
-                            <div className={styles.group}>
-                                <span className="muted">Generos </span><span className={styles.overflow}>Graphic NovelsYoung AdultComicsMental HealthContemporaryFictionGraphic Novels Comics AdultComicsMental HealthContemporaryFictionGraphic</span>
-                            </div>
-                            <div className={styles.group}>
-                                <span className="muted">247 páginas, Paperback</span>
+                        <div className={styles.sticky}>
+                            <div className={styles.content}>
+                                <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1678747712i/117703749.jpg" />
+                                <Button>Leer</Button>
+                                <Button>Comprar en Amazon</Button>
+                                {rating.value && <Rating initialStars={rating.value} big={false} isInteractive={false} />}
                             </div>
                         </div>
-                        <div className={styles.reviews}>
-                            <h2>Valoraciones y análisis</h2>
-                            <Reviews {...{ bookId, reviewsData, setRating }} />
+
+                        <div className={styles.container}>
+                            <div className={styles.content}>
+                                <div className={styles.title}>
+                                    <h1>{data.title}</h1>
+                                    <span>{data.author || "Marta Bijan"}</span>
+                                </div>
+                                <div className={styles.rating}>
+                                    {rating.value && <Rating initialStars={rating.value} big={false} isInteractive={false} />}
+                                    {rating.value && <Score {...{ bookId, rating }} />}
+                                </div>
+                                <div className={styles.description}>
+                                    Sinopsis del libro.....
+                                </div>
+                                <div className={styles.metadata}>
+                                    <div className={styles.group}>
+                                        <span className="muted">Generos </span><span className={styles.overflow}>Graphic NovelsYoung AdultComicsMental HealthContemporaryFictionGraphic Novels Comics AdultComicsMental HealthContemporaryFictionGraphic</span>
+                                    </div>
+                                    <div className={styles.group}>
+                                        <span className="muted">247 páginas, Paperback</span>
+                                    </div>
+                                </div>
+                                <div className={styles.reviews}>
+                                    <h2>Valoraciones y análisis</h2>
+                                    <Reviews {...{ bookId, reviewsData, setRating }} />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            }
+        </>
     )
 }
 
