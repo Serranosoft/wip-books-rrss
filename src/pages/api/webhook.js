@@ -4,7 +4,7 @@ export default async function handler(req, res) {
     if (req.method === 'POST') {
         console.log(req.body);
 
-        const { error } = await supabase.from("books").insert({ id: req.body.post_id, name: req.body.post_title });
+        const { error } = await supabase.from("books").insert({ id: req.body.post_id, name: req.body.post.post_title });
 
         if (!error) return res.status(200);
         return res.status(500).json({ error: error.message });;       
