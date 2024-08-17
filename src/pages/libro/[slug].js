@@ -68,7 +68,7 @@ export default function book({ data, reviewsData }) {
 export const getStaticPaths = async () => {
     const allPosts = await getAllSlugs("book");
     return {
-        paths: allPosts.edges.map(({ node }) => `${node.slug}`),
+        paths: allPosts.edges.map(({ node }) => `/libro/${node.slug}`),
         fallback: true
     }
 }

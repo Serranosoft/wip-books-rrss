@@ -35,7 +35,7 @@ export async function getBookBySlug(slug) {
     const data = await fetchAPI(
         `
         {
-            post(id: "/book/${slug}", idType: SLUG) {
+            post(id: "${slug}", idType: SLUG) {
                 postId
                 title
                 content
