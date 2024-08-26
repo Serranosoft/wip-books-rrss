@@ -5,7 +5,14 @@ import { MdOutlineStar, MdOutlineStarBorder } from "react-icons/md";
 
 export const starSize = 50;
 
-export default function Rating({ initialStars = 0, isInteractive = true, big = false, setRating, userId }) {
+export default function Rating({
+    initialStars = 0,
+    isInteractive = true,
+    big = false,
+    setRating,
+    ratingReference = null,
+    userId
+}) {
     const [activeRating, setActiveRating] = useState(initialStars);
     const [hoveredRating, setHoveredRating] = useState(0);
     const [isHovered, setIsHovered] = useState(false);
@@ -31,11 +38,22 @@ export default function Rating({ initialStars = 0, isInteractive = true, big = f
             if (!userId) {
                 setSignInModal(true);
                 return;
-            } 
+            }
             setIsHovered(false);
             const rating = calculate(e);
             setActiveRating(rating);
-            if (setRating) setRating(rating)
+            
+            onClick(rating);
+        }
+    }
+
+    function onClick(rating) {
+        if (ratingReference) {
+            console.log("a");
+            setRating(ratingReference, rating);
+        } else if (setRating) {
+            console.log("b");
+            setRating(rating)
         }
     }
 

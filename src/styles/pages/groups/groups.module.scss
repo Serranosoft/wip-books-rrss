@@ -1,0 +1,19 @@
+// Test purpose
+
+.test1 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+    border: 1px solid goldenrod;
+}
+
+.test2 {
+    display: flex;
+    gap: 1rem;
+    .testItem {
+        border: 2px solid pink;
+        padding: 1rem;
+        border-radius: 0.5rem;
+    }
+}
