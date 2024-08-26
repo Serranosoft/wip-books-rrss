@@ -1,0 +1,63 @@
+@import "../colors.scss";
+
+.container {
+    display: flex;
+    height: 2.5rem;
+    .button {
+        height: inherit;
+        padding: 0 0.5rem;
+        border-top-left-radius: 2rem;
+        border-bottom-left-radius: 2rem;
+        background-color: $primary;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        align-self: center;
+        span {
+            font-size: 1.2rem;
+            color: #fff;
+            text-align: center;
+            font-weight: 600;
+            font-family: var(--font-serif);
+        }
+    }
+
+    .dropdown {
+        width: 3.25rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-left: 2px solid $secondary;
+        cursor: pointer;
+        transition: background-color 0.2s;
+        background-color: $primary;
+        border-top-right-radius: 2rem;
+        border-bottom-right-radius: 2rem;
+        &:hover {
+            background-color: $secondary;
+        }
+        svg {
+            width: 2rem;
+            height: 2rem;
+            margin-right: 0.25rem;
+            fill: #fff;
+        }
+
+    }
+  
+        .menuRadio {
+            padding: 0.25rem;
+            li {
+                font-size: 1.2rem;
+            text-align: center;
+            font-weight: 600;
+            font-family: var(--font-serif);
+                &:hover {
+                    background-color: $secondary;
+                }
+            }
+        }
+
+    
+}

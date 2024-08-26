@@ -6,6 +6,7 @@ import { getAllReviewsById_db } from "@/controller/database/reviews";
 import Reviews from "@/layout/books/reviews";
 import { useEffect, useState } from "react";
 import Button from "@/components/button";
+import StatusButton from "@/layout/books/status-button";
 
 export default function book({ data, reviewsData }) {
 
@@ -31,8 +32,7 @@ export default function book({ data, reviewsData }) {
                         <div className={styles.sticky}>
                             <div className={styles.content}>
                                 <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1678747712i/117703749.jpg" />
-                                <Button>Leer</Button>
-                                <Button>Comprar en Amazon</Button>
+                                <StatusButton {...{ bookId }} />
                                 {rating.value && <Rating initialStars={rating.value} big={false} isInteractive={false} />}
                             </div>
                         </div>
