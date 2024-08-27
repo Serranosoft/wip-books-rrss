@@ -56,9 +56,11 @@ export default function StatusButton({ bookId }) {
 
     async function getBookStatus() {
         const result = await getBookStatus_db({ userId, bookId });
-        setWantRead(result.want_to_read);
-        setCurrentyReading(result.currently_reading);
-        setFinishedReading(result.finished_reading);
+        if (result) {
+            setWantRead(result.want_to_read);
+            setCurrentyReading(result.currently_reading);
+            setFinishedReading(result.finished_reading);
+        }
     }
 
     const setBookAsWantToRead = async () => await setBookAsWantToRead_db({ userId, bookId, want_to_read: !wantRead });

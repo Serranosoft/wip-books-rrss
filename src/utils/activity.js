@@ -1,7 +1,14 @@
 /** Formatea una actividad de reseña */
 export function formatReview(review) {
     let activity = `<a href="${review.users.slug}"> ${review.users.name}</a> ha escrito una valoración de ${review.rating} estrellas en el <a href="/libro/${review.books.name}">libro ${review.books.name}</a>`;
-    activity += getDaysSinceReview(review.published) !== 0 ? ` hace ${getDaysSinceReview(review.published)} día/s` : " recientemente";
+    activity += getDaysSinceReview(review.published) > 1 ? ` hace ${getDaysSinceReview(review.published)} días` : " recientemente";
+    return activity;
+}
+
+/** Formatea una actividad de follow */
+export function formatFollow(follow) {
+    let activity = `<a href="/usuario/${follow.follower.name}">${follow.follower.name}</a> ha comenzado a seguir a <a href="/usuario/${follow.followed.slug}">${follow.followed.name}</a>`;
+    activity += getDaysSinceReview(follow.timestamp) > 1 ? ` hace ${getDaysSinceReview(follow.timestamp)} días` : " recientemente";
     return activity;
 }
 

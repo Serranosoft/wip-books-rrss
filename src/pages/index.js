@@ -1,11 +1,12 @@
-import styles from "@/styles/pages/index.module.scss";
 import Head from "next/head";
-import ButtonLink from "@/components/button-link";
-import Hero from "@/layout/home/hero";
-import Gallery from "@/layout/home/gallery";
-import Banner from "@/layout/home/banner";
+import Landing from "@/layout/home/landing";
+import { useContext } from "react";
+import { Context } from "@/utils/context";
+import Feed from "@/layout/home/feed";
 
 export default function Home() {
+
+    const { userId } = useContext(Context);
 
     return (
         <>
@@ -15,11 +16,7 @@ export default function Home() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <main className={styles.main}>
-                <Hero />
-                <Gallery />
-                <Banner />
-            </main>
+            {userId ? <Feed /> : <Landing />}
         </>
     );
 }

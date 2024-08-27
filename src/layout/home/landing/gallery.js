@@ -1,4 +1,4 @@
-import styles from "@/styles/layout/home/gallery.module.scss";
+import styles from "@/styles/layout/home/landing/gallery.module.scss";
 
 export default function Gallery() {
 

@@ -2,7 +2,7 @@ import { supabase } from "@/utils/supabase";
 
 /** Encargado de establecer una relación de seguidor-seguido */
 export async function follow_db({ followerId, followedId }) {
-    const { error } = await supabase.from("followers").insert({ follower_id: followerId, followed_id: followedId });
+    const { error } = await supabase.from("followers").insert({ follower_id: followerId, followed_id: followedId, timestamp: ((new Date()).toISOString()).toLocaleString('es-ES') });
     if (error) console.log(error);
 }
 

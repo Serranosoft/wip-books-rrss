@@ -1,6 +1,6 @@
 import Button from "@/components/button";
 import GoogleButton from "@/components/google-button";
-import styles from "@/styles/layout/home/banner.module.scss";
+import styles from "@/styles/layout/home/landing/banner.module.scss";
 
 export default function Banner() {
 

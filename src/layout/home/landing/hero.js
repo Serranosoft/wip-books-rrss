@@ -1,6 +1,6 @@
 import Button from "@/components/button";
 import ButtonLink from "@/components/button-link";
-import styles from "@/styles/layout/home/hero.module.scss";
+import styles from "@/styles/layout/home/landing/hero.module.scss";
 
 export default function Hero() {
 
