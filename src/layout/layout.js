@@ -1,5 +1,5 @@
 import Header from "./header";
-import { getSession, getSession_auth, isAuth } from "@/controller/database/user";
+import { getSession, getSession_auth, getUserInfo_db, isAuth } from "@/controller/database/user";
 import { Context } from "@/utils/context";
 import { useEffect, useState } from "react";
 import { Nunito_Sans, Salsa, Source_Serif_4 } from 'next/font/google'
@@ -13,6 +13,21 @@ export default function Layout({ children }) {
 
     const [userId, setUserId] = useState(null);
     const [signInModal, setSignInModal] = useState(false);
+    const [avatar, setAvatar] = useState(null);
+    const [name, setName] = useState(null);
+    const [slug, setSlug] = useState(null);
+
+    useEffect(() => {
+        async function getUserInfo() {
+            const result = await getUserInfo_db({ id: userId });
+            setAvatar(result[0].image)
+            setName(result[0].name)
+            setSlug(result[0].slug)
+        }
+        if (userId) {
+            getUserInfo();
+        }
+    }, [userId])
 
     useEffect(() => {
         async function getSession() {
@@ -28,7 +43,7 @@ export default function Layout({ children }) {
     }, []);
 
     return (
-        <Context.Provider value={{ ... { userId, setSignInModal } }}>
+        <Context.Provider value={{ ... { userId, avatar, name, slug, setSignInModal } }}>
             <main className={`${salsa.variable} ${nunitoSans.className}`}>
                 <Header />
                 {children}

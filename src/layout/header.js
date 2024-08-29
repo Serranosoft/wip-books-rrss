@@ -13,22 +13,13 @@ export default function Header() {
 
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     /* const [signInModal, setSignInModal] = useState(false); */
-    const [avatar, setAvatar] = useState(null);
-    const [name, setName] = useState(null);
-    const [slug, setSlug] = useState(null);
-    const { userId, setSignInModal } = useContext(Context);
+    // const [avatar, setAvatar] = useState(null);
+    // const [name, setName] = useState(null);
+    // const [slug, setSlug] = useState(null);
+    const { userId, avatar, name, slug, setSignInModal } = useContext(Context);
 
     useEffect(() => {
-        async function getUserInfo() {
-            const result = await getUserInfo_db({ id: userId });
-            setAvatar(result[0].image)
-            setName(result[0].name)
-            setSlug(result[0].slug)
-        }
-        if (userId) {
-            setIsAuthenticated(true);
-            getUserInfo();
-        }
+        if (userId) setIsAuthenticated(true);
     }, [userId])
 
     async function logoutUser() {

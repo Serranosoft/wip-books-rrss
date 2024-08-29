@@ -8,7 +8,7 @@ import FollowActivity from "./follow-activity";
 
 export default function Feed() {
 
-    const { userId } = useContext(Context);
+    const { userId, avatar, name, slug } = useContext(Context);
 
     /** Usuarios que estoy siguiendo */
     const [following, setFollowing] = useState([]);
@@ -26,12 +26,38 @@ export default function Feed() {
 
     return (
         <main className={styles.main}>
-            <ButtonLink url="/libro/rtyrtyrtyrty">Ver más</ButtonLink>
-            <ButtonLink url="/libro/Librooooo">Ver más</ButtonLink>
-            <div>
-                <h2>Última actividad de los usuarios que estás siguiendo</h2>
-                <ReviewActivity {...{ following }} />
-                <FollowActivity {...{ following }} />
+
+
+            <div className={styles.container}>
+                <aside>
+                    <div className={`${styles.card} ${styles.profileCard}`}>
+                        <img src={`${avatar}`} />
+                        <span className={styles.name}>{name}</span>
+                        <ButtonLink url={`/usuario/${slug}`}>Editar perfil</ButtonLink>
+
+                        <div className={styles.metadata}>
+                            <span className={styles.title}>Mis datos</span>
+                            <div>
+                                <span>Libros:</span>
+                                <span>34</span>
+                            </div>
+                            <div>
+                                <span>Seguidores:</span>
+                                <span>8</span>
+                            </div>
+                            <div>
+                                <span>Siguiendo:</span>
+                                <span>4</span>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+                <section>
+                    <ReviewActivity {...{ following }} />
+                    <FollowActivity {...{ following }} />
+                    <ButtonLink url="/libro/rtyrtyrtyrty">Ver más</ButtonLink>
+                    <ButtonLink url="/libro/Librooooo">Ver más</ButtonLink>
+                </section>
             </div>
         </main>
     )
