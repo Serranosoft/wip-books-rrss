@@ -1,6 +1,8 @@
+import styles from "@/styles/layout/home/feed/activity.module.scss";
 import { getFollowsActivity_db } from "@/controller/database/activity";
 import { formatFollow } from "@/utils/activity";
 import { useEffect, useState } from "react";
+import { MdSupervisorAccount } from "react-icons/md";
 
 export default function FollowActivity({ following }) {
 
@@ -17,17 +19,28 @@ export default function FollowActivity({ following }) {
         const result = await getFollowsActivity_db({ following });
         const follows = [];
         result.forEach((follow) => follows.push(formatFollow(follow)));
+        console.log(follows);
         setFollowActivity(follows);
     }
-
     return (
-        <div>
+        <>
             {
-                followActivity.length > 0 &&
-                <div>
-                    {followActivity.map((follow) => <div dangerouslySetInnerHTML={{ __html: follow }}></div>)}
-                </div>
+                followActivity.map((follow) => {
+                    return (
+                        <div className={styles.activity}>
+                            <div className={styles.content}>
+                                <div dangerouslySetInnerHTML={{ __html: follow.activity }}></div>
+                                <div className={styles.actions}>
+                                    <a href={`/usuario/${follow.user}`}>
+                                        <MdSupervisorAccount size={30} color={"#5f5f5f"} />
+                                        <span>Ver perfil</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    )
+                })
             }
-        </div>
+        </>
     )
 }
