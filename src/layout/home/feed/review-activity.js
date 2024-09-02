@@ -2,8 +2,7 @@ import styles from "@/styles/layout/home/feed/activity.module.scss";
 import { getReviewsActivity_db } from "@/controller/database/activity";
 import { formatReview } from "@/utils/activity";
 import { useEffect, useState } from "react";
-import ButtonLink from "@/components/button-link";
-import { MdBook, MdBookmarks, MdSupervisorAccount } from "react-icons/md";
+import { MdBookmarks, MdSupervisorAccount } from "react-icons/md";
 import Avatar from "@/components/avatar";
 
 export default function ReviewActivity({ following }) {
@@ -21,7 +20,6 @@ export default function ReviewActivity({ following }) {
         const result = await getReviewsActivity_db({ following });
         const reviews = [];
         result.forEach((review) => reviews.push(formatReview(review)));
-        console.log(reviews);
         setReviewActivity(reviews);
     }
 

@@ -5,6 +5,7 @@ import DeleteReviewElement from "./delete-review";
 import Link from "next/link";
 import Rating from "@/components/rating";
 import Follow from "./follow";
+import Avatar from "@/components/avatar";
 
 export default function Review({ review, reviews, setReviews, userId, setUserReviewed }) {
 
