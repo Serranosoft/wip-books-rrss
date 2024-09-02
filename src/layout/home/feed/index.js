@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from "react"
 import ButtonLink from "@/components/button-link";
 import ReviewActivity from "./review-activity";
 import FollowActivity from "./follow-activity";
+import Avatar from "@/components/avatar";
 
 export default function Feed() {
 
@@ -26,12 +27,10 @@ export default function Feed() {
 
     return (
         <main className={styles.main}>
-
-
             <div className={styles.container}>
                 <aside>
                     <div className={`${styles.card} ${styles.profileCard}`}>
-                        <img src={`${avatar}`} />
+                        <Avatar src={`${avatar}`} />
                         <span className={styles.name}>{name}</span>
                         <ButtonLink url={`/usuario/${slug}`}>Editar perfil</ButtonLink>
 

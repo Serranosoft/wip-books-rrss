@@ -9,6 +9,7 @@ import UserProfile from "@/components/user-profile";
 import { Menu, MenuDivider, MenuItem } from '@szhsin/react-menu';
 import "@szhsin/react-menu/dist/index.css";
 import Link from "next/link";
+import Avatar from "@/components/avatar";
 export default function Header() {
 
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -39,7 +40,7 @@ export default function Header() {
                         <div className={styles.userMenu}>
                             <Menu menuButton={
                                 <div className={styles.avatarWrapper}>
-                                    {avatar ? <img src={avatar} referrerPolicy="no-referrer" /> : <UserProfile />}
+                                    {avatar ? <Avatar src={avatar} /> : <UserProfile />}
                                 </div>
                             }>
                                 <span>{name}</span>

@@ -4,6 +4,7 @@ import { formatReview } from "@/utils/activity";
 import { useEffect, useState } from "react";
 import ButtonLink from "@/components/button-link";
 import { MdBook, MdBookmarks, MdSupervisorAccount } from "react-icons/md";
+import Avatar from "@/components/avatar";
 
 export default function ReviewActivity({ following }) {
 
@@ -33,7 +34,7 @@ export default function ReviewActivity({ following }) {
 
                             <div className={styles.content}>
                                 <div className={styles.header}>
-                                    <img src={review.avatar}></img>
+                                    <Avatar src={review.avatar} />
                                     <div className={styles.info}>
                                         <span className={styles.name}>{review.user}</span>
                                         <span className={styles.title}>{review.userTitle || "(Sin título)"}</span>

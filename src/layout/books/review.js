@@ -15,7 +15,7 @@ export default function Review({ review, reviews, setReviews, userId, setUserRev
         
         <div className={styles.container} key={review.id}>
             <div className={styles.user}>
-                <Link href={`/usuario/${review.users.slug}`}><img src={review.users.image} referrerPolicy="no-referrer" /></Link>
+                <Link href={`/usuario/${review.users.slug}`}><Avatar src={review.users.image} /></Link>
                 <Link href={`/usuario/${review.users.slug}`}><h2>{review.users.name}</h2></Link>
                 <Follow {...{ reviews, review, userId }} />
             </div>

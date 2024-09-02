@@ -1,6 +1,5 @@
 /** Formatea una actividad de reseña */
 export function formatReview(review) {
-    console.log(review);
     let result = {
         user: review.users.name,
         userSlug: review.users.slug,
@@ -23,6 +22,7 @@ export function formatFollow(follow) {
 }
 
 /** Devuelve la cantidad de días que han ocurrido entre el día de hoy y el día de publicación de una review */
+/** Revisar -> https://github.com/github/relative-time-element (5kb) */
 export function getDaysSinceReview(published) {
     const date = new Date(published);
     const now = new Date();
